@@ -47,13 +47,12 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Future<void> getData() async {
-
     var response = await Dio().get('https://api.coincap.io/v2/assets');
     List<Crypto> cryptoList = response.data['data']
         .map<Crypto>((jsonMapObject) => Crypto.fromMapjson(jsonMapObject))
         .toList();
 
-    Navigator.push(
+    Navigator.pushReplacement(
       context,
       MaterialPageRoute(
         builder: (context) => CryptoListScreen(
@@ -61,11 +60,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    HomeScreen();
-    super.dispose();
   }
 }
